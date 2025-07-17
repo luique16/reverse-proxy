@@ -45,6 +45,10 @@ func Execute() {
 		<-ready
 	}
 
+	go proxy_core.Redirector(ports, port, args.LogOpt, ready)
+
+	<-ready
+
 	fmt.Println("Proxy started ✅")
 
 	select {}
