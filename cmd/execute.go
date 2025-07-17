@@ -2,7 +2,10 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/luique16/reverse-proxy/internal/cli"
+	"github.com/luique16/reverse-proxy/internal/proxy_core"
+	"github.com/luique16/reverse-proxy/internal/server"
 )
 
 func Execute() {
@@ -29,5 +32,20 @@ func Execute() {
 		num = 3
 	}
 
-	fmt.Printf("Running %d instances after port %d\n", num, port)
+	ready := make(chan bool)
+
+	server.ConfigureServer()
+	ports, err := proxy_core.Start(port, num, args.LogOpt, server.Server, ready)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	
+	for _ = range ports {
+		<-ready
+	}
+
+	fmt.Println("Proxy started ✅")
+
+	select {}
 }
