@@ -25,9 +25,10 @@ func Start(port, num int, log bool, server func(int, chan<- bool) error, ready c
 		}
 		go server(port + i, ready)
 
+		ports = append(ports, port + i)
+
 		counter += 1
 		i += 1
-		ports = append(ports, port + i)
 	}
 
 	return ports, nil
