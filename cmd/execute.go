@@ -34,14 +34,14 @@ func Execute() {
 
 	ready := make(chan bool)
 
-	server.ConfigureServer()
 	ports, err := proxy_core.Start(port, num, args.LogOpt, server.Server, ready)
+
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	
-	for _ = range ports {
+	for range ports {
 		<-ready
 	}
 

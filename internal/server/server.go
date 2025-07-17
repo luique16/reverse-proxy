@@ -6,18 +6,18 @@ import (
 	"net/http"
 )
 
-func ConfigureServer() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+func Server(port int, ready chan<- bool) error {
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello World!"))
 	})
-}
 
-func Server(port int, ready chan<- bool) error {
 	fmt.Println("Instance running on port " + strconv.Itoa(port) + " ✅")
 
 	ready <- true
 
-	err := http.ListenAndServe(":"+strconv.Itoa(port), nil)
+	err := http.ListenAndServe(":" + strconv.Itoa(port), mux)
 
 	if err != nil {
 		return err
