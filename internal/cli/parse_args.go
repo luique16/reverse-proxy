@@ -10,8 +10,6 @@ type Args struct {
 	Port       int
 	NumOpt     bool
 	Num        int
-	PathOpt    bool
-	Path       string
 	LogOpt     bool
 	HelpOpt    bool
 	WrongUsage bool
@@ -48,16 +46,6 @@ func ParseArgs() Args {
 			args.NumOpt = true
 			if i+1 < len(array) {
 				args.Num, err = strconv.Atoi(array[i+1])
-				lookNext = true
-			} else {
-				args.WrongUsage = true
-				args.HelpOpt = true
-				return args
-			}
-		case "-P", "--path":
-			args.PathOpt = true
-			if i+1 < len(array) {
-				args.Path = array[i+1]
 				lookNext = true
 			} else {
 				args.WrongUsage = true
