@@ -3,7 +3,7 @@
 <p align="center"> Reverse Proxy is a simple Go library to spawn multiple HTTP instances behind a reverse proxy. </p>
 
 <div align="center">
-<img src="./static/example.png" alt="Example" width="600">
+<img src="./static/example.jpg" alt="Example" width="600">
 </div>
 
 ## 📦 How to use
