@@ -2,10 +2,6 @@
 
 <p align="center"> Reverse Proxy is a simple Go library to spawn multiple HTTP instances behind a reverse proxy. </p>
 
-<div align="center">
-<img src="./static/example.jpg" alt="Example" width="600">
-</div>
-
 ## 📦 How to use
 
 You can install the reverse-proxy cli using the following command:
@@ -52,6 +48,15 @@ func main() {
 }
 ```
 
+Expected output:
+
+```
+Instance running on port 3001 ✅
+Instance running on port 3002 ✅
+Instance running on port 3003 ✅
+Proxy started ✅
+```
+
 ## 📝 Details
 
 - Incoming requests on the base port are load-balanced in round-robin fashion to the spawned instances.
@@ -89,10 +94,24 @@ The CLI has the following options:
 Here's an example:
 
 ```bash
-reverse-proxy -p 3000 -n 3 -l
+reverse-proxy -p 3000 -n 10 --log
 ```
 
-This will start a proxy on port 3000 with 3 instances and use the log option.
+Expected output:
+
+```
+Instance running on port 3001 ✅
+Instance running on port 3002 ✅
+Instance running on port 3003 ✅
+Instance running on port 3004 ✅
+Instance running on port 3005 ✅
+Instance running on port 3006 ✅
+Instance running on port 3007 ✅
+Instance running on port 3008 ✅
+Instance running on port 3009 ✅
+Instance running on port 3010 ✅
+Proxy started ✅
+```
 
 ## ✅ TODO
 
