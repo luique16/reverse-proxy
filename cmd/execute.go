@@ -42,18 +42,14 @@ func Execute() {
 		num = 3
 	}
 
-	ready := make(chan bool)
-
-	ports, err := proxy_core.Start(port, num, args.LogOpt, server.Server, ready)
+	ports, err := proxy_core.StartInstances(port, num, server.NewServer(port), args.LogOpt)
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	
-	for range ports {
-		<-ready
-	}
+
+	ready := make(chan bool)
 
 	go proxy_core.Redirector(ports, port, args.LogOpt, ready)
 
