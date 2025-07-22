@@ -1,4 +1,4 @@
-package reverse_proxy
+package proxy
 
 import (
 	"fmt"
@@ -7,7 +7,9 @@ import (
 	"github.com/luique16/reverse-proxy/internal/proxy_core"
 )
 
-func ReverseProxy(port int, num int, server *http.ServeMux, log bool) {
+// Run starts a reverse proxy server with the given port, number of instances, server mux and log option.
+// If log is true, the proxy will log all instances created and the redirections made.
+func Run(port int, num int, server *http.ServeMux, log bool) {
 	ports, err := proxy_core.StartInstances(port, num, server, log)
 
 	if err != nil {

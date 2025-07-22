@@ -9,5 +9,5 @@ import (
 func main() {
 	port, num, log := cli.FilterArgs(cli.ParseArgs())
 
-	reverse_proxy.ReverseProxy(port, num, server.NewServer(), log)
+	proxy.Run(port, num, server.NewServer(), log)
 }
